@@ -4,7 +4,7 @@ setup(
     name='mypythonlib',
     packages=find_packages(include=['mypythonlib']),
     author='Me',
-    version='0.1.0',
+    version='0.1.1',
     description='My first Python library',
     install_requires=["numpy", "scipy", "matplotlib","h5py"],
     setup_requires=['pytest-runner'],
