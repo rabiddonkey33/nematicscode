@@ -77,6 +77,79 @@ def load_u(root,frame,NX, NY, NZ):
     u[1]=convert_binary(path+r'/uy_%d.dat'%frame, NX, NY, NZ)
     u[2]=convert_binary(path+r'/uz_%d.dat'%frame, NX, NY, NZ)
     return u
+def diagonalizeQ(qtensor):
+    """
+    Diagonalization of Q tensor in 3D nematics.
+    Currently it onply provides the uniaxial information.
+    Will be updated to derive biaxial analysis in the future.
+    Algorythm provided by Matthew Peterson:
+    THIS CODE IS FROM YINGYOU MA, NOT ME
+    https://github.com/YingyouMa/3D-active-nematics/blob/405c8d54d797cc39c1f14c82112cb43d304ef16c/reference/order_parameter_calculation.pdf
+
+    Parameters
+    ----------
+    qtensor : numpy array, N x M x L x 5  or  N x M x L x 3x 3
+              tensor order parameter Q of each grid
+              N, M and L are the number of grids in each dimension.
+              The Q tensor for each grid could be represented by 5 numbers or 3 x 3 = 9 numbers
+              If 5, then qtensor[..., 0] = Q_xx, qtensor[..., 1] = Q_xy, and so on. 
+              If 3 x 3, then qtensor[..., 0,0] = Q_xx, qtensor[..., 0,1] = Q_xy, and so on.
+              
+
+    Returns
+    -------
+    S : numpy array, N x M x L
+        the biggest eigenvalue as the scalar order parameter of each grid
+
+    n : numpy array, N x M x L x 3
+        the eigenvector corresponding to the biggest eigenvalue, as the director, of each grid.
+
+
+    Dependencies
+    ------------
+    - NumPy: 1.22.0
+
+    """
+
+    N, M, L = np.shape(qtensor)[:3]
+
+    if np.shape(qtensor) == (N, M, L, 3, 3):
+        Q = qtensor
+    elif np.shape(qtensor) == (N, M, L, 5):
+        Q = np.zeros( (N, M, L, 3, 3)  )
+        Q[..., 0,0] = qtensor[..., 0]
+        Q[..., 0,1] = qtensor[..., 1]
+        Q[..., 0,2] = qtensor[..., 2]
+        Q[..., 1,0] = qtensor[..., 1]
+        Q[..., 1,1] = qtensor[..., 3]
+        Q[..., 1,2] = qtensor[..., 4]
+        Q[..., 2,0] = qtensor[..., 2]
+        Q[..., 2,1] = qtensor[..., 4]
+        Q[..., 2,2] = - Q[..., 0,0] - Q[..., 1,1]
+    else:
+        raise NameError(
+            "The dimension of qtensor would be (N, M, L, 3, 3) or (N, M, L, 5)"
+            )
+
+    p = 0.5 * np.einsum('ijkab, ijkba -> ijk', Q, Q)
+    q = np.linalg.det(Q)
+    r = 2 * np.sqrt( p / 3 )
+
+    # derive S and n
+    temp = 4 * q / r**3
+    temp[temp>1]  =  1
+    temp[temp<-1] = -1
+    S = r * np.cos( 1/3 * np.arccos( temp ) )
+    temp = np.array( [
+        Q[..., 0,2] * ( Q[..., 1,1] - S ) - Q[..., 0,1] * Q[..., 1,2] ,
+        Q[..., 1,2] * ( Q[..., 0,0] - S ) - Q[..., 0,1] * Q[..., 0,2] ,
+        Q[..., 0,1]**2 - ( Q[..., 0,0] - S ) * ( Q[..., 1,1] - S  )
+        ] )
+    n = temp / np.linalg.norm(temp, axis = 0)
+    n = n.transpose((1,2,3,0))
+    S = S * 1.5
+
+    return S, n
 def autocorrelation(x,axes=None):
     """
     returns the autocorellation function\n
