@@ -1,9 +1,0 @@
-Metadata-Version: 2.1
-Name: mypythonlib
-Version: 0.1.0
-Summary: My first Python library
-Author: Me
-Requires-Dist: numpy
-Requires-Dist: scipy
-Requires-Dist: matplotlib
-Requires-Dist: h5py
