@@ -49,7 +49,7 @@ def load_Q(root, frame, NX, NY, NZ):
     Q[2,0] = convert_binary(path+r'/Qxz_%d.dat'%frame, NX, NY, NZ)
     Q[1,1] = convert_binary(path+r'/Qyy_%d.dat'%frame, NX, NY, NZ)
     Q[1,2] = convert_binary(path+r'/Qyz_%d.dat'%frame, NX, NY, NZ)
-    Q[1,0] = Q[0,1]
+    Q[0,1] = Q[1,0]
     Q[0,2] = Q[2,0]
     Q[2,1] = Q[1,2]
     Q[2,2] = -Q[0,0] - Q[1,1]
