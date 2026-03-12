@@ -10,8 +10,8 @@ In example.c you can set the dimensions of the channel as well as the dimensions
 
 In interface.c the boundary conditions for the velocities have been set such that the two walls along the x axis are periodic and every othber wall is no slip. This begins on line 104.
 
-After running a simulations a folder labeled "test" will appear in your directory with 
+After running a simulations a folder labeled "test" will appear in your directory with data files for each component of the Q tensor and velocity (if you have that enabled) for each time step
 
 Analysis Code: 
-In this code I 
-I have created functions to 
+This code extracts our data from the test folder and puts it into an hdf5 file system. In mypythonlib you will find a list of basic functions that we call in our analysis code. Our analysis code consists of:
+Frank.py: Calculates and plots each type of Frank deformation (bend, twist, splay)  of a system at each time point
