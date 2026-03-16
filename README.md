@@ -18,3 +18,4 @@ Frank.py: Calculates and plots each type of Frank deformation (bend, twist, spla
 Visualizer.py: Generates figures representing 3D disclination lines and nematics at boundaries for each time point looped throught (currently from 1 to 300)
 xyquiver,xzquiver,yzquiver: Generates a velocity quiver plot (with a color map for vorticity) in the respective planes for a preset timepoint
 
+
