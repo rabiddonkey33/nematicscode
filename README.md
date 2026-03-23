@@ -15,7 +15,7 @@ After running a simulations a folder labeled "test" will appear in your director
 Analysis Code: 
 This code extracts our data from the test folder and puts it into an hdf5 file system (in practice we do not use the hdf5 filesysten but the infrastrucure is there if you want to use it). In mypythonlib you will find a list of basic functions that we call in our analysis code. Our analysis code consists of:
 
-Base.py: We build most of our quiver plotting functions off of this code. It unpacks our Q and u data files and puts them into usable arrays. You can find a more rigorous version of this code in myfunctions.py
+Base.py: We build most of our quiver plotting functions off of this code. It unpacks our Q and u data files and puts them into usable arrays. You can find a more rigorously comnmented and more robust version of this code in myfunctions.py if you desire. Base is much of what I actually ended up using and it is ugly
 
 Frank.py: Calculates and plots each type of Frank deformation (bend, twist, splay)  of a system at each time point
 <img width="1117" height="565" alt="Screenshot 2026-03-23 101545" src="https://github.com/user-attachments/assets/01cde219-609f-4f97-8dc6-761674255e7e" />
