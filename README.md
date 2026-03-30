@@ -18,7 +18,7 @@ Analysis Code:
   Base.py: We build most of our quiver plotting functions off of this code. It unpacks our Q and u data files and puts them into usable arrays. You can find a more       rigorously comnmented and more robust version of this code in myfunctions.py if you desire. Base is much of what I actually ended up using and it is ugly
   
  Frank.py: Calculates and plots each type of Frank deformation (bend, twist, splay)  of a system at each time point
- <img width="1117" height="565" alt="Screenshot 2026-03-23 101545" src="https://github.com/user-attachments/assets/01cde219-609f-4f97-8dc6-761674255e7e" />
+ <img width="500" height="250" alt="Screenshot 2026-03-23 101545" src="https://github.com/user-attachments/assets/01cde219-609f-4f97-8dc6-761674255e7e" />
   
 Visualizer.py: Generates figures representing 3D disclination lines and nematics at boundaries for each time point looped throught (currently from 1 to 300)
   <img width="637" height="180" alt="image" src="https://github.com/user-attachments/assets/329b347d-7c21-41b5-b290-330ca42db15e" />
