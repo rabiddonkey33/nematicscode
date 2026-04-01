@@ -8,7 +8,7 @@ There are two components of this code: The simulation code you will run in HPCC 
   example.c handles the bulk of our calculations, whereas interface is a backend with functions that example calls.
   ## example.c
   In example.c you can set the dimensions of the channel as well as the dimensions of the grid that will be numerically integrated over by modifying LX, LY, LZ and     NX,NY,NZ respectively. You can also modify the activity number ALPHA (Modifying system height LZ will have a similar effect on nondimensionalized activity number H 
-  $\sqrt\frac{ \alpha}{k}$ . Deeper into the code defect spacing and the radius of a defect can be modified.
+  $\sqrt\frac{ \alpha}{k}$ . Deeper into the code defect spacing and the radius of a defect can be modified. director field is defined according to formula for 2 line defects $\theta(r)=-\frac{1}{2}\tan(\frac{y}{x})+\frac{1}{2}\tan(\frac{y}{x-R})+\frac{\delta \theta}{2}[1+\frac{\log(x^2+y^2)-\log((x-R)^2+y^2){\log(R^2) − log(r^2)} ]$
   ## interface.c
   In interface.c the boundary conditions for the velocities have been set such that the two walls along the x axis are periodic and every other wall is no slip. This     begins on line 104. Additionally the director field is defined by an angle $\theta$ using the formula 
   
