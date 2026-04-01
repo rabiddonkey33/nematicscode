@@ -6,9 +6,11 @@ There are two components of this code: The simulation code you will run in HPCC 
   Our simulation code sets up a 3D active nematic in which 2 line defects are initialized at a variable distance from the center of a rectangular channel. We run this   c code in the HPCC.  This code utilizes the multigrid method in order to solve the nematohydrodynamic equations over our 3D grid.
   There are two main files you will be modifying in this: example.c and interface.c (mainly example.c)
   example.c handles the bulk of our calculations, whereas interface is a backend with functions that example calls.
-  In example.c you can set the dimensions of the channel as well as the dimensions of the grid that will be numerically integrated over by modifying LX,LY,LZ and     NX,NY,NZ respectively. You can also modify the activity number ALPHA (Modifying system height LZ will have a similar effect on nondimensionalized activity number H $  \sqrt\frac{ \alpha}{k}$ . Deeper into the code defect spacing and the radius of a defect can be modified.
-  
-  In interface.c the boundary conditions for the velocities have been set such that the two walls along the x axis are periodic and every other wall is no slip. This     begins on line 104.
+  ## example.c
+  In example.c you can set the dimensions of the channel as well as the dimensions of the grid that will be numerically integrated over by modifying LX, LY, LZ and     NX,NY,NZ respectively. You can also modify the activity number ALPHA (Modifying system height LZ will have a similar effect on nondimensionalized activity number H 
+  $\sqrt\frac{ \alpha}{k}$ . Deeper into the code defect spacing and the radius of a defect can be modified.
+  ## interface.c
+  In interface.c the boundary conditions for the velocities have been set such that the two walls along the x axis are periodic and every other wall is no slip. This     begins on line 104. Additionally the director field is defined by an angle $\theta$ using the formula 
   
   After running a simulations (with the command sbatch run.sh) a folder labeled "test" will appear in your directory with data files for each component of the Q tensor   and velocity (if you have that enabled) for each time step
 
