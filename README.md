@@ -22,11 +22,16 @@ This code tells the HPCC how to run example. Simply make sure that cpus-per-task
  
 
 # Analysis Code: 
- This code extracts our data from the test folder and gives us arrays representing the Q tensor at each point in space and time and velocity at each point in space and time. This data is also fed into an hdf5 file system. In practice we do not use the hdf5 filesysten but the infrastrucure is there if you want to use it. There is additional code contained int the Our analysis code consists of:
+ This code extracts our data from the test folder and gives us arrays representing the Q tensor at each point in space and time and velocity at each point in space and time. This data is also fed into an hdf5 file system. In practice we do not use the hdf5 filesysten but the infrastrucure is there if you want to use it.:
 
   ## Base.py   
-  We build most of our quiver plotting functions off of this code. It unpacks our Q and u data files and puts them into usable arrays. You can find a more        rigorously comnmented and more robust version of this code in myfunctions.py if you desire. Base is much of what I actually ended up using and it is ugly
+  We build most of our quiver plotting functions off of this code. It unpacks our Q and u data files and puts them into usable arrays. You can find a more        rigorously comnmented and more robust version of this code in https://github.com/rabiddonkey33/nematicscode.git if you desire. This extra code can help us quantify turbulence by calling an autocorellation function. Base is much of what I actually ended up using and it is much uglier but gets the job done.
 
+ ## xyquiver, xzquiver, yzquiver
+ Generates a velocity quiver plot (with a color map for vorticity) in the respective planes for a preset timepoint:
+  <img width="467" height="227" alt="Image" src="https://github.com/user-attachments/assets/e4c555cf-5597-4445-a8a1-fb71afc34f4b" />
+  
+  
   ## Splot.py
   Generates a plot of the order parameter S in whichever crossection you choose. Very simple code
   <img width="448" height="223" alt="Image" src="https://github.com/user-attachments/assets/a5ab8265-34f5-45d1-8edc-d57cc9d2dfdf" />
@@ -38,10 +43,6 @@ This code tells the HPCC how to run example. Simply make sure that cpus-per-task
 Generates figures representing 3D disclination lines and nematics at boundaries for each time point looped throught (currently from 1 to 300)
   <img width="637" height="180" alt="image" src="https://github.com/user-attachments/assets/329b347d-7c21-41b5-b290-330ca42db15e" />
 
- ## xyquiver, xzquiver, yzquiver
- Generates a velocity quiver plot (with a color map for vorticity) in the respective planes for a preset timepoint:
-  <img width="467" height="227" alt="Image" src="https://github.com/user-attachments/assets/e4c555cf-5597-4445-a8a1-fb71afc34f4b" />
-  
-  
+
   
   
