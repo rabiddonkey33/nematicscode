@@ -3,16 +3,17 @@ In short I have been initializing line defects in a channel. My experiment invol
 There are two components of this code: The simulation code you will run in HPCC and the analysis code you will run locally in Python (If you choose)
 
 # Simulation Code
-  Our simulation code sets up a 3D active nematic in which 2 line defects are initialized at a variable distance from the center of a rectangular channel. We run this   c code in the HPCC.  This code utilizes the multigrid method in order to solve the nematohydrodynamic equations over our 3D grid.
+  Our simulation code sets up a 3D active nematic in which 2 line defects are initialized at a variable distance from the center of a rectangular channel. We run this c code in the HPCC.  This code utilizes the multigrid method in order to solve the nematohydrodynamic equations over our 3D grid.
   There are two main files you will be modifying in this: example.c and interface.c (mainly example.c)
   example.c handles the bulk of our calculations, whereas interface is a backend with functions that example calls.
   ## example.c
-  In example.c you can set the dimensions of the channel as well as the dimensions of the grid that will be numerically integrated over by modifying LX, LY, LZ and     NX,NY,NZ respectively. You can also modify the activity number ALPHA (Modifying system height LZ will have a similar effect on nondimensionalized activity number H 
-  $\sqrt\frac{ \alpha}{k}$ . Deeper into the code defect spacing and the radius of a defect can be modified. director field is defined according to formula for 2 line defects $\theta(r)=-\frac{1}{2}\tan(\frac{y}{x})+\frac{1}{2}\tan(\frac{y}{x-R})+$ $\frac{\delta \theta}{2} [1+\frac{\log(x^2+y^2)-\log((x-R)^2+y^2)}{\log(R^2) − \log(r^2)}]$.
+  In example.c you can set the dimensions of the channel as well as the dimensions of the grid that will be numerically integrated over by modifying LX, LY, LZ and     NX,NY,NZ respectively. You can also modify the activity number ALPHA (Modifying system height LZ will have a similar effect on nondimensionalized activity number H=   $\sqrt\frac{ \alpha}{k}$. You can also modify the timestep and total time integrated.\
+  Deeper into the code our director field is defined. The locations of the defects and their radii are set, and then the director field is defined by angle $\theta(r)=-\frac{1}{2}\tan(\frac{y}{x})+\frac{1}{2}\tan(\frac{y}{x-R})+$ $\frac{\delta \theta}{2} [1+\frac{\log(x^2+y^2)-\log((x-R)^2+y^2)}{\log(R^2) − \log(r^2)}]$. Finally we set our initial director field values $nx=cos(\theta)$, $ny=sin(\theta)$, and $nz=0$.
  After running a simulations (with the command sbatch run.sh) a folder labeled "test" will appear in your directory with data files for each component of the Q tensor and velocity (if you have that enabled) for each time step
 
   ## interface.c
-  In interface.c the boundary conditions for the velocities have been set such that the two walls along the x axis are periodic and every other wall is no slip. This begins on line 104. Additionally the director field is defined by an angle $\theta$ using the same formula as in example.c. 
+  Serves as a backend for example.c to interact with. You will be modifying this much less than example.c but there are a few things to keep in mind
+  In interface.c the boundary conditions for the velocities have been set such that the two walls along the x axis are periodic and every other wall is no slip. This begins on line 104. Additionally the director field is defined in the same manner as in example.c in 2 places. Remember to modify sections starting at lines 92 and 295. each instance of the variables dist and rcore should be the same across example.c and interface.c. 
   
  
 
@@ -21,7 +22,9 @@ There are two components of this code: The simulation code you will run in HPCC 
 
   ## Base.py   
   We build most of our quiver plotting functions off of this code. It unpacks our Q and u data files and puts them into usable arrays. You can find a more        rigorously comnmented and more robust version of this code in myfunctions.py if you desire. Base is much of what I actually ended up using and it is ugly
-  
+
+  ## Splot.py
+  Generates a plot of the order parameter S in whichever crossection you choose. Very simple code
  ## Frank.py
  Calculates and plots each type of Frank deformation (bend, twist, splay)  of a system at each time point
  <img width="500" height="250" alt="Screenshot 2026-03-23 101545" src="https://github.com/user-attachments/assets/01cde219-609f-4f97-8dc6-761674255e7e" />
