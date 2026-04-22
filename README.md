@@ -39,7 +39,7 @@ Generates figures representing 3D disclination lines and nematics at boundaries 
 
  ## xyquiver, xzquiver, yzquiver
  Generates a velocity quiver plot (with a color map for vorticity) in the respective planes for a preset timepoint:
-  <img width="430" height="262" alt="Screenshot 2026-03-23 101013" src="https://github.com/user-attachments/assets/c29d7448-6fa5-4a80-b43f-ea885de18627" />
+  <img width="467" height="227" alt="Image" src="https://github.com/user-attachments/assets/e4c555cf-5597-4445-a8a1-fb71afc34f4b" />
   
   
   
