@@ -1,5 +1,5 @@
 Hello! If you are reading this you must have an interest in picking up my research.
-In short I have been initializing line defects in a channel. My experiment involved modifying the defect spacing and activity levels, but of course whatever you do will probably be different.
+In short I have been initializing line defects in a channel and seeing what happens when I allow the system to evolve over time. My experiment involved modifying the defect spacing and activity levels, but of course whatever you do will probably be different.
 There are two components of this code: The simulation code you will run in HPCC and the analysis code you will run locally in Python (If you choose)
 
 # Simulation Code
@@ -13,7 +13,7 @@ There are two components of this code: The simulation code you will run in HPCC 
 
   ## interface.c
   Serves as a backend for example.c to interact with. You will be modifying this much less than example.c but there are a few things to keep in mind
-  In interface.c the boundary conditions for the velocities have been set such that the two walls along the x axis are periodic and every other wall is no slip. This begins on line 104. Additionally the director field is defined in the same manner as in example.c in 2 places. Remember to modify sections starting at lines 92 and 295. each instance of the variables dist and rcore should be the same across example.c and interface.c. 
+  In interface.c the boundary conditions for the velocities have been set such that the two walls along the x axis are periodic and every other wall is no slip. The boundary conditions are set in two different places, beginning on lines 104 and 310 respectively. You must modify the mob variables in each for loop to fit whatever boundary conditions you wish to create. . Additionally the director field is defined in the same manner as in example.c in 2 places. Remember to modify sections starting at lines 92 and 295. each instance of the variables dist and rcore should be the same across example.c and interface.c. 
 ## run.sh
 This code tells the HPCC how to run example. Simply make sure that cpus-per-task is equal to your NUMPROCS in example.c. Also change the mail-user variable from my email to whatever your email is.
 
