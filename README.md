@@ -22,7 +22,7 @@ This code tells the HPCC how to run example. Simply make sure that cpus-per-task
  
 
 # Analysis Code: 
- This code extracts our data from the test folder and gives us arrays representing the Q tensor at each point in space and time and velocity at each point in space and time. This data is also fed into an hdf5 file system. In practice we do not use the hdf5 filesysten but the infrastrucure is there if you want to use it. Our analysis code consists of:
+ This code extracts our data from the test folder and gives us arrays representing the Q tensor at each point in space and time and velocity at each point in space and time. This data is also fed into an hdf5 file system. In practice we do not use the hdf5 filesysten but the infrastrucure is there if you want to use it. There is additional code contained int the Our analysis code consists of:
 
   ## Base.py   
   We build most of our quiver plotting functions off of this code. It unpacks our Q and u data files and puts them into usable arrays. You can find a more        rigorously comnmented and more robust version of this code in myfunctions.py if you desire. Base is much of what I actually ended up using and it is ugly
