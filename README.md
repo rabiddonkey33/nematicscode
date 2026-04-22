@@ -3,9 +3,9 @@ In short I have been initializing line defects in a channel and seeing what happ
 There are two components of this code: The simulation code you will run in HPCC and the analysis code you will run locally in Python (If you choose)
 
 # Simulation Code
-  Our simulation code sets up a 3D active nematic in which 2 line defects are initialized at a variable distance from the center of a rectangular channel. This code utilizes the multigrid method in order to solve the nematohydrodynamic equations over our 3D grid. All of this is run on HPCC.
+  Our simulation code sets up a 3D active nematic in which 2 line defects are initialized at a variable distance from the center of a rectangular channel. This code utilizes the multigrid method in order to solve the nematohydrodynamic equations over our 3D grid. All of this is run on HPCC. 
   There are two main files you will be modifying in this: example.c and interface.c (mainly example.c)
-  example.c handles the bulk of our calculations, whereas interface is a backend with functions that example calls. This simulation code is all in a folder called "Template". You can run a simulation in this folder (or preferably a copy of this folder) with the command "sbatch run.sh". This will generate a folder called "test" which contains Q tensor and velocity (if enabled) data files for each timestep. After this code is done running, you can should download it.
+  example.c handles the bulk of our calculations, whereas interface is a backend with functions that example calls. This simulation code is all in a folder called "Template". You can run a simulation in this folder (or preferably a copy of this folder) with the command "sbatch run.sh". This will generate a folder called "test" which contains Q tensor and velocity (if enabled) data files for each timestep. After this code is done running, you can should download it. 
   ## example.c
   In example.c you can set the dimensions of the channel as well as the dimensions of the grid that will be numerically integrated over by modifying LX, LY, LZ and NX,NY,NZ respectively. The ratio LX/NX, LY/NY, and LZ/NZ will determine our grid spacing. A lower number means finer integration, while a higher number is coarser.  You can also modify the activity number ALPHA (Modifying system height LZ will have a similar effect on nondimensionalized activity number H=   $\sqrt\frac{ \alpha}{k}$). You can also modify the timestep and total time integrated.\
   Deeper into the code our director field is defined. The locations of the defects and their radii are set, and then the director field is defined by angle $\theta(r)=-\frac{1}{2}\tan(\frac{y}{x})+\frac{1}{2}\tan(\frac{y}{x-R})+$ $\frac{\delta \theta}{2} [1+\frac{\log(x^2+y^2)-\log((x-R)^2+y^2)}{\log(R^2) − \log(r^2)}]$. Finally we set our initial director field values $nx=cos(\theta)$, $ny=sin(\theta)$, and $nz=0$.
@@ -28,7 +28,7 @@ This code tells the HPCC how to run example. Simply make sure that cpus-per-task
   We build most of our quiver plotting functions off of this code. It unpacks our Q and u data files and puts them into usable arrays. You can find a more        rigorously comnmented and more robust version of this code in https://github.com/rabiddonkey33/nematicscode.git if you desire. This extra code can help us quantify turbulence by calling an autocorellation function. Base is much of what I actually ended up using and it is much uglier but gets the job done. Make sure to change the variable "root" to wherever you download your copy of "Template".
 
  ## xyquiver, xzquiver, yzquiver
- Generates a velocity quiver plot (with a color map for vorticity) in the respective planes for a preset timepoint. This code is weird and I do not remember how it works:
+ Generates a velocity quiver plot (with a color map for vorticity) in the respective planes for a preset timepoint. I would suggest looking at the xyquiver code to understand this.
   <img width="467" height="227" alt="Image" src="https://github.com/user-attachments/assets/e4c555cf-5597-4445-a8a1-fb71afc34f4b" />
   
   
