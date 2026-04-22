@@ -13,7 +13,8 @@ There are two components of this code: The simulation code you will run in HPCC 
 
   ## interface.c
   Serves as a backend for example.c to interact with. You will be modifying this much less than example.c but there are a few things to keep in mind
-  In interface.c the boundary conditions for the velocities have been set such that the two walls along the x axis are periodic and every other wall is no slip. The boundary conditions are set in two different places, beginning on lines 104 and 310 respectively. You must modify the mob variables in each for loop to fit whatever boundary conditions you wish to create. . Additionally the director field is defined in the same manner as in example.c in 2 places. Remember to modify sections starting at lines 92 and 295. each instance of the variables dist and rcore should be the same across example.c and interface.c. 
+  In interface.c the boundary conditions for the velocities have been set such that the two walls along the x axis are periodic and every other wall is no slip. The boundary conditions are set in two different places, beginning on lines 104 and 310 respectively. You must modify the mob variables in each for loop to fit whatever boundary conditions you wish to create.
+  <img width="1256" height="597" alt="Image" src="https://github.com/user-attachments/assets/7c2a8828-a928-4204-8476-68a2e0058526" /> Additionally the director field is defined in the same manner as in example.c in 2 places. Remember to modify sections starting at lines 92 and 295. each instance of the variables dist and rcore should be the same across example.c and interface.c. 
 ## run.sh
 This code tells the HPCC how to run example. Simply make sure that cpus-per-task is equal to your NUMPROCS in example.c. Also change the mail-user variable from my email to whatever your email is.
 
